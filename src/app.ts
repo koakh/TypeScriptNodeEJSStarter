@@ -3,32 +3,32 @@ import path from 'path';
 import axios from 'axios';
 import bodyParser from 'body-parser';
 
-// const viewsDirPath = path.join(__dirname, "templates", "views");
+// const viewsDirPath = path.join(__dirname, 'templates', 'views');
 const app: Express = express()
   .use(bodyParser.urlencoded({ extended: false }))
-  .set("view engine", "ejs")
-  // .set("views", viewsDirPath)
-  .use(express.static(path.join(__dirname, '..',"/public")));
+  .set('view engine', 'ejs')
+  // .set('views', viewsDirPath)
+  .use(express.static(path.join(__dirname, '..','/public')));
 
 app.get('/', (req: Request, res: Response) => {
   // index refers to index.ejs
-  res.render("index");
+  res.render('index');
 });
 
-app.post("/login", (req: Request, res: Response) => {
+app.post('/login', (req: Request, res: Response) => {
   const { name, password } = req.body;  
-  if (name === "admin" && password === "admin") {
-    res.render("success", {
+  if (name === 'admin' && password === 'admin') {
+    res.render('success', {
       // passing as an object in second argument to the render method so it will be available inside that template
       username: name,
     });
   } else {
-    res.render("failure");
+    res.render('failure');
   }
 });
 
-app.get("/repos", async (req: Request, res: Response) => {
-  const username = req.query.username || "koakh";
+app.get('/repos', async (req: Request, res: Response) => {
+  const username = req.query.username || 'koakh';
   try {
     const result = await axios.get(
       `https://api.github.com/users/${username}/repos`
@@ -38,12 +38,12 @@ app.get("/repos", async (req: Request, res: Response) => {
       url: repo.html_url,
       description: repo.description,
     }));
-    res.render("repos", {
+    res.render('repos', {
       repos
     });
   } catch (error) {
     console.log(error);
-    res.status(400).send("Error while getting list of repositories");
+    res.status(400).send('Error while getting list of repositories');
   }
 });
 

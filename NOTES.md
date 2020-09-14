@@ -422,3 +422,7 @@ So if we want to store a views folder inside the templates folder, we can specif
 const path = require("path");
 const viewsDirPath = path.join(__dirname, "templates", "views");
 app.set("views", viewsDirPath);
+
+## UI Framework
+
+To have some minimal UI, use [mini](https://minicss.org/), get code from [criticallinksteam/c3/c3-system-core commit id 3269ae0](https://bitbucket.org/criticallinksteam/c3/commits/)
